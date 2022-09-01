@@ -38,7 +38,7 @@ The docs/application folder contains additional info when the BIT90 is in "basic
 ## Mame emulator
 The developers of Mame created a bit90 machine which is working excellent:  
 http://adb.arcadeitalia.net/dettaglio_mame.php?game_name=bit90  
-There's no tape interface yet but you can load a basic program in memory uing the debugger.
+There's no tape interface yet but you can load a basic program in memory using the debugger.  
 I have created an example in the Mame folder on how to do this.
 
 ## To do
