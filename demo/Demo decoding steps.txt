@@ -1,0 +1,36 @@
+Preparation
+-----------
+1. BIT90 audio out connector (black) to PC line-in (blue)
+2. PC install Audacity with default settings
+	Configure line-in input on Mono set volume 100%
+
+
+BIT90 record basic program to PC wav file
+-----------------------------------------
+1. BIT90 load the basic program
+2. BIT90 command SAVE "DEMO"
+3. PC Audicity start record
+4. BIT90 confirm "Y"
+5. PC Audicity after BIT90 shows **END** stop recording
+6. PC Audicity save audio as Demo.wav in PCM 16 signed wav format
+
+
+BIT90 Load basic program from PC wav file
+-----------------------------------------
+1. BIT90 audio in connector (red) in PC line-out (green)
+2. BIT90 command NEW to clear memory
+3. BIT90 command LOAD and confirm "Y"
+4. PC play the WAV file "Demo.wav"
+5. BIT90 check program with commands LIST and RUN
+
+
+PC Decoding wav file to basic listing 
+-------------------------------------
+1. Install python 3
+2. Audacity load the wav file
+3. Audacity save audio as other format.. raw PCM 8 bits unsigned
+4. Decode raw to binary with bit90decode.py demo
+5. Decode binary to basic with bit90bas.py demo
+
+
+

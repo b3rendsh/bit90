@@ -1,0 +1,2 @@
+load roms\Demo1.bin,7800
+go

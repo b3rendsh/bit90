@@ -1,0 +1,31 @@
+Record steps
+------------
+The following steps will create the Demo1.bin file:
+1. BIT90 cold boot
+2. BIT90 Load the demo program
+3. Connect the audio cables to pc and start Audicity
+4. BIT90 Save the demo program as binary:
+   BSAVE "DEMO",30720,18432
+5. Audacity record the program and save audio as raw PCM 8 bit unsigned to "Demo1.raw"
+6. Decode the raw to binary with bit90decode1.py Demo1
+   (bit90decode1.py is a workaround, to do: fix bit90decode.py to skip the initial sequence in the tape dump)
+
+Note: with the bsave command a binary memory dump is made.
+0x7800 - 0x7fff ram memory area that contains pointers and other bit90 state info  
+0x8000 - 0xbfff ram memory area where the basic program is stored
+
+PC steps
+--------
+1. Install Mame, see: https://www.mamedev.org/
+2. Download bit90.zip and put it in the mame/roms folder
+3. Copy the bit90demo.bat and demoscript.txt to the mame folder
+4. Copy the demo1.bin to the mame/roms folder
+5. Start bit90demo.bat
+
+Note: 
+The current mame 0.247 bit90 machine has no option to load from tape.
+The debugger load to memory is used as a workaround.
+The memory must be filled prior to starting the machine.
+
+
+

@@ -1,0 +1,7 @@
+The colecovision games that you may have on tape also work in mame.
+Save them on the BIT90 with BSAVE "GAME",32768,16384 (for a 16K game)
+If you convert these files with bit90decode.py then the resulting game.bin is identical to the coleco cartridge rom dump.
+Copy the game.bin to the mame/roms folder.
+ 
+You can load the coleco binaries as cartridge ie. start mame with:
+mame bit90 -cart <roms\game.bin>
