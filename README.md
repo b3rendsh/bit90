@@ -10,13 +10,13 @@ In this repository you find technical documentation, tools and basic programs I 
 
 # Hardware
 The code shared in this repository is tested and works on the following hardware:
-BIT90 Computer (PAL EU version)
-BASIC 3.1 ROM
-32K Memory expansion card
-RS232 serial interface expansion card
-Parallel expansion card for BIT90 printer (not Centronics)
-Sanyo DR101 taperecorder
-11.6" TFT Display with composite video + audio
+- BIT90 Computer (PAL EU version)
+- BASIC 3.1 ROM
+- 32K Memory expansion card
+- RS232 serial interface expansion card
+- Parallel expansion card for BIT90 printer (not Centronics)
+- Sanyo DR101 taperecorder
+- 11.6" TFT Display with composite video + audio
 
 Note: in the PAL version 3.1 of the BIT90 rom  30x24 lines of text are available instead of 32x24 text in the NTSC version.
 This was a workaround for the video errors in the PAL RF TV module, that caused the most left part of the screen to be invisible.
@@ -26,8 +26,8 @@ The BIT90 basic is similar to MSX and TI-99/4A. You can extend it with your own 
 This is explained in the docs/application documentation.
 
 # Decoding tools
-The bit90decode.py program decodes tape data to a binary file.
-The bit90bas.py program decodes binary code to a basic text file.
+-The bit90decode.py program decodes tape data to a binary file.
+-The bit90bas.py program decodes binary code to a basic text file.
 The demo folder contains an example howto do this.
 
 # Documentation
@@ -48,8 +48,10 @@ I have created an example in the Mame folder on howto do this.
 - Z80 Assembler tools
 - BASIC command extensions in assembler
 - Custom text mode 50x24 characters, useable as BASIC extension
+
 2. Look into a RC2014 retro hardware solution if it can run the BIT90 basic:
 https://hackaday.io/project/159057-game-boards-for-rc2014
+
 3. Create RS-232 communication program (rudimentary terminal emulation works)
 
 
