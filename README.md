@@ -31,9 +31,9 @@ This is explained in the docs/application documentation.
 The demo folder contains an example howto do this.  
 
 ## Documentation
-The manual you can find here: https://www.retrocomputers.gr/media/kunena/attachments/47/BIT90manual.zip
-The docs/system folder contains technical diagrams.
-The docs/application folder contains additional info when the BIT90 is in "basic" mode.
+The manual you can find here: https://www.retrocomputers.gr/media/kunena/attachments/47/BIT90manual.zip  
+The docs/system folder contains technical diagrams.  
+The docs/application folder contains additional info when the BIT90 is in "basic" mode.  
 
 ## Mame emulator
 The developers of Mame created a bit90 machine which is working excellent. 
