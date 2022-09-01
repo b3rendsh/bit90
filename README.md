@@ -28,7 +28,7 @@ This is explained in the docs/application documentation.
 ## Decoding tools
 -The bit90decode.py program decodes tape data to a binary file.  
 -The bit90bas.py program decodes binary code to a basic text file.  
-The demo folder contains an example howto do this.  
+The demo folder contains an example how to do this.  
 
 ## Documentation
 The manual you can find here: https://www.retrocomputers.gr/media/kunena/attachments/47/BIT90manual.zip  
@@ -36,9 +36,10 @@ The docs/system folder contains technical diagrams.
 The docs/application folder contains additional info when the BIT90 is in "basic" mode.  
 
 ## Mame emulator
-The developers of Mame created a bit90 machine which is working excellent. 
+The developers of Mame created a bit90 machine which is working excellent:  
+http://adb.arcadeitalia.net/dettaglio_mame.php?game_name=bit90  
 There's no tape interface yet but you can load a basic program in memory uing the debugger.
-I have created an example in the Mame folder on howto do this.
+I have created an example in the Mame folder on how to do this.
 
 ## To do
 
