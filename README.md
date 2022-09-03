@@ -19,7 +19,7 @@ The code shared in this repository is tested and works on the following hardware
 - 11.6" TFT Display with composite video + audio
 
 Note: in the (PAL) version 3.1 of the BIT90 rom 30x24 characters are available in textmode instead of the 32x24 in the (NTSC) 3.0 version.
-This was a workaround for some video errors in the PAL RF TV module, that caused the most left part of the screen to be invisible.
+Due to some errors in the PAL RF TV module, the far left side of the screen is not visible.
 
 ## Basic
 The BIT90 basic is similar to MSX and TI-99/4A. You can extend it with your own commands.
