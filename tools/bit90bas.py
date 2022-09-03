@@ -1,5 +1,5 @@
 # Python 3
-# BIT90 Binary to Basic decoder v1.0
+# BIT90 Binary to Basic decoder v1.0.1
 #
 # Each BASIC line consists of:
 # POS VALUE
@@ -29,7 +29,7 @@ try:
                     'GOSUB','CALL','DATA','ELSE','FOR','GOTO','HOME','INPUT','RANDOMIZE','CLEAR','LIST','REM','NEXT','ON','PRINT','RESTORE','READ',\
                     'STEP','THEN','PLOT','RETURN','TO','UNTRACE','IF','TRACE','COPY','RENUM','PLAY','RESERVED-174','FRE','BYE','END','OPTIONBASE','LET',\
                     'OUT','RESERVED-181','RESERVED-182','WAIT','REC','>=','<=','<>','AND','OR','NOT','HEX$(','ABS{','ATN{','COS(','EXP(','INT(','LOG(','LN(',\
-                    'SGN(','SIN(','SQR(','TAN(','STR$(','CHR$(','IN(','JOYST(','EOF(','SPC(','RIGHT$','ASC(','VAL(','LEFT$(','MID$(','LEN(','INKEY$',\
+                    'SGN(','SIN(','SQR(','TAN(','STR$(','CHR$(','IN(','JOYST(','EOF(','SPC(','RIGHT$(','ASC(','VAL(','LEFT$(','MID$(','LEN(','INKEY$',\
                     'POS','BLOAD','FN','BSAVE','RESERVED-220','DEL','RESERVED-222','RESERVED-223']
         startbas  = False  # Start of basic program dete
         quoted    = False  # Detect if a special character is quoted instead of tokencode for values > 0x80
