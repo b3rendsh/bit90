@@ -1,6 +1,16 @@
 # Python 3
-# BIT90 WAV file decoder v1.0
+# BIT90 WAV file decoder v1.2
 # The input file should be a raw file type PCM 8-bit unsiged 44100Hz mono
+#
+# The BIT90 saves data to tape in blocks of 256 bytes
+# Every second there's a sync signal (followed by 8 bits) and then 19 bytes of control data.
+# Each byte is saved with least significant bit first and followed by 2 stop/sync bits.
+# The stop bits are:
+#     0 0 = init tape
+#     1 0 = sync data
+#     1 1 = user data
+# The data is saved with FSK modulation. A 0 bit wave has lower frequency than a 1 bit.
+# The difference between 0 and 1 is recognized by counting the number of samples in 1 complete sine-wave.
 
 
 import sys	# needed for the commandline parameter
@@ -21,6 +31,8 @@ try:
         bytehex  = 0            # hexidecimal byte sum of each 8 bits
         message  = ''           # decoded message
         syncbyte = 0            # counter for number of bytes to skip after sync (total 19)
+        blockdta = []           # each data block should contain 256 bytes
+        blocks   = 0            # total number of blocks written to file
 
         byte = int.from_bytes(f.read(1),'big')
         while byte:
@@ -40,8 +52,11 @@ try:
                 if countLo < 4 or countHi < 4 or countLo > 10 or countHi > 10:
                     # Sync detected
                     bit = -2
+                    if syncbyte > 18:
+                      print('sync: '+ str(syncs+1) + '  bytes: ' + str(syncbyte-19))
+                      syncs += 1
                     syncbyte = 0
-                    syncs += 1
+                    blockdta = []
                 else:
                     if total >= 10 and total <= 13:
                         bit = 1
@@ -50,30 +65,25 @@ try:
                     else:
                         bit = -1
                         noise += 1
-                # print('Bytenr: ' + str(hex(bytenr)) + '  bit: ' + str(bit) + ' total: ' + str(total))
                 if bit >= 0:
                     bits += 1
                     if bits > 0 and bits <= 8:
                         bytehex += pow(2, (bits -1) % 8) * bit
                     elif bits == 10:
-                        # probable use of bit 9 and bit 10 after each byte:
-                        # 0 0 = init tape data
-                        # 1 0 = sync data
-                        # 1 1 = user data
-                        # message += ' ' + str(hex(bytehex))
-                        # print('bytehex: ' + str(hex(bytehex)))
                         if bit == 1:
                             if syncbyte > 18:
-                                w.write(bytehex.to_bytes(1,'big'))
-                            else:
-                                # print('syncbyte:' + str(syncbyte))
-                                syncbyte += 1
-
+                                blockdta.append(bytehex)
+                                if len(blockdta) == 256:
+                                    for i in blockdta:
+                                        w.write(i.to_bytes(1,'big'))
+                                    blockdta = []
+                                    blocks += 1
+                            syncbyte += 1
                         bytehex = 0
                         bits = 0 
                 else:
                     # reset bitcount after sync
-                    bits = -8       # after sync start byte after next 8 bits (to be improved)
+                    bits = -8       # after sync start byte after next 8 bits
                     bytehex = 0
                     
                 countLo = 1
@@ -81,10 +91,9 @@ try:
                 wave = 0
             byte = int.from_bytes(f.read(1),'big')
             bytenr += 1
-        print('Syncs : ' + str(syncs))
+        print('\nSyncs : ' + str(syncs))
+        print('Blocks: ' + str(blocks) + ' (' + str(blocks*256) + ' bytes)')
         print('Noise : ' + str(noise))
-        # print('Bits  : ' + str(bits))
-        # print('Message : ' + message)
 except IOError:
 	print('Error decoding file:' + filename + '.raw')
 	
