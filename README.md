@@ -31,7 +31,7 @@ Some examples uploaded include:
 Quickstart guide for use in mame:  
 start mame in debug-mode: mame bit90 -debug  
 in debug window load binary\M7800-*.bin files at address 7800.  
-load all other binary\*.bin files at address 8004 and then run BIT90 command: CALL 12491.  
+load all other binary\\*.bin files at address 8004 and then run BIT90 command: CALL 12491.  
 
 ## Decoding tools
 -The bit90decode.py program decodes tape data to a binary file.  
