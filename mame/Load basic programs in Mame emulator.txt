@@ -1,30 +1,73 @@
-Record steps
+Introduction
 ------------
-The following steps will create the Demo1.bin file:
-1. BIT90 cold boot
-2. BIT90 Load the demo program
-3. Connect the audio cables to pc and start Audicity
-4. BIT90 Save the demo program as binary:
-   BSAVE "DEMO",30720,18432
-5. Audacity record the program and save audio as raw PCM 8 bit unsigned to "Demo1.raw"
-6. Decode the raw to binary with bit90decode.py Demo1
+To install Mame, see: https://www.mamedev.org/
+Download bit90.zip (use google) and put it in the mame/roms folder
 
-Note: with the bsave command a binary memory dump is made.
-0x7800 - 0x7fff ram memory area that contains pointers and other bit90 state info  
-0x8000 - 0xbfff ram memory area where the basic program is stored
+The current mame version (0.247) bit90 machine has no tape support yet.
+You can however load a decoded program as binary in memory with the debugger.
 
-PC steps
---------
-1. Install Mame, see: https://www.mamedev.org/
-2. Download bit90.zip and put it in the mame/roms folder
-3. Copy the bit90demo.bat and demoscript.txt to the mame folder
-4. Copy the demo1.bin to the mame/roms folder
-5. Start bit90demo.bat
+There are two alternative approaches, as an example the demo.bas program is used.
 
-Note: 
-The current mame 0.247 bit90 machine has no option to load from tape.
-The debugger load to memory is therefore used as a workaround.
-The memory file must be loaded prior to starting the machine.
+
+Alternative 1:
+--------------
+This is the fastest approach if you already have the program as a binary file.
+You load the binary file in the emulated BIT90 memory at address 0x8004.
+You call the BIT90 rom routine at 0x30CB (decimal 12491) that sets the memory pointers. 
+
+Detailed steps:
+1. Decode the basic program to a binary (see decoding steps in the demo folder)
+2. Copy the demo.bin to the mame/roms folder
+3. Start mame in debug mode with the following command:
+   mame bit90 -debug
+4. Boot the machine (F5 or command "go" in the debug window)
+5. Load the demo.bin in memory at position 0x8004 with following command in the debugger:
+   load roms\demo.bin,8004
+6. At the emulated BIT90 command prompt call the routine to set the memory pointers:
+   CALL 12491
+7. Enjoy with the loaded BIT90 basic program :-)
+
+
+
+Alternative 2:
+--------------
+The alternative approach is to include the BIT90 state ram memory space in the binary file.
+Prior to starting the BIT90 machine you load this binary file in the memory with the debugger at address 0x7800.
+
+On the BIT90 you can save the memory to tape with the BSAVE command:
+Start address is 30720 (0x7800)
+Length is 18432 bytes(2K for the bit90 state and 16K basic program)
+
+0x7800 - 0x7fff = ram memory area that contains pointers and other bit90 state info 
+Note: 0x7800 is mapped to the same memory as 0x7000
+
+0x8000 - 0xbfff = ram memory area where the basic program is stored.
+ 
+Detailed steps:
+1. Create the Demo1.bin file:
+   1a. BIT90 cold boot
+   1b. BIT90 Load the demo program
+   1c. Connect the audio cables to pc and start Audicity
+   1d. BIT90 Save the demo program as binary:
+       BSAVE "DEMO",30720,18432
+   1e. Audacity record the program and save audio as raw PCM 8 bit unsigned to "Demo1.raw"
+   1f. Decode the raw to binary with bit90decode.py Demo1
+2. Copy the demo1.bin to the mame/roms folder
+3. Start mame in debugger mode with the following command:
+   mame bit90 -debug
+4. Load the Demo1.bin in memory at position 0x7800 with following command in the debugger:
+   load roms\Demo1.bin,7800
+5. Boot the machine (F5 or command "go" in the debug window)
+6. Enjoy with the loaded BIT90 basic program :-) 
+   BIT90 command: RUN
+
+Steps 3 to 5 can be automated:
+1. Copy the bit90demo.bat and demoscript.txt to the mame folder
+2. Start bit90demo.bat
+
+
+
+
 
 
 
