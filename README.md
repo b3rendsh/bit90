@@ -28,6 +28,10 @@ Some examples uploaded include:
 - Conway's game of LIFE (UI in BASIC / engine in Assembler).    
 - Simple RS232 terminal that uses a BASIC extension for a 50x24 text mode.  
   
+Quickstart guide for use in mame:  
+start mame in debug-mode: mame bit90 -debug  
+in debug window load binary\M7800-*.bin files at address 7800.  
+load all other binary\*.bin files at address 8004 and then run BIT90 command: CALL 12491.  
 
 ## Decoding tools
 -The bit90decode.py program decodes tape data to a binary file.  
