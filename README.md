@@ -29,8 +29,8 @@ Some examples uploaded include:
   
 Quickstart guide for use in mame:  
 start mame in debug-mode: mame bit90 -debug  
-in the debug window load binary M7800-*.bin files at address 7800.  
-load all other binary *.bin files at address 8004 and then run BIT90 command: CALL 12491.  
+in the debug window load a binary M7800-*.bin file at address 7800 and start the machine with F5.  
+or start the machine first and load any other binary *.bin file at address 8004 and then run BIT90 command: CALL 12491.  
   
 Conversion from other BASIC systems:  
 Converting TI-BASIC or any Microsoft BASIC version prior to 1983 (eg. BASIC-80) is relatively easy.
