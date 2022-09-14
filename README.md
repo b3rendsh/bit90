@@ -31,9 +31,9 @@ Quickstart guide for use in mame:
 start mame in debug-mode: mame bit90 -debug  
 in the debug window load binary M7800-*.bin files at address 7800.  
 load all other binary *.bin files at address 8004 and then run BIT90 command: CALL 12491.  
-
-Conversion from other BASIC systems:
-Cnverting TI-BASIC or any Microsoft BASIC version prior to 1983 (eg. BASIC-80) is relatively easy.
+  
+Conversion from other BASIC systems:  
+Converting TI-BASIC or any Microsoft BASIC version prior to 1983 (eg. BASIC-80) is relatively easy.
 One limitation of BIT90 BASIC is that numeric variables are single precision floating point, no integers or double precision.
 The graphics commands are almost identical to TI and there are music notes to PLAY music like in MSX.
 The "BIOS" is different than MSX and certainly the TI-99/4A.  
