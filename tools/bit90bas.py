@@ -1,5 +1,5 @@
-# Python 3
-# BIT90 Binary to Basic decoder v1.0.2
+#!/usr/bin/env python3
+# BIT90 Binary to Basic decoder v1.0.3
 #
 # Each BASIC line consists of:
 # POS VALUE
@@ -35,11 +35,10 @@ try:
                     'OUT','ONERRGOTO','RESUME','WAIT','REC','>=','<=','<>','AND','OR','NOT','HEX$(','ABS{','ATN{','COS(','EXP(','INT(','LOG(','LN(',\
                     'SGN(','SIN(','SQR(','TAN(','STR$(','CHR$(','IN(','JOYST(','EOF(','SPC(','RIGHT$(','ASC(','VAL(','LEFT$(','MID$(','LEN(','INKEY$',\
                     'POS','BLOAD','FN','BSAVE','RESERVED-220','DEL','RESERVED-222','RESERVED-223']
-        startbas  = False  # Start of basic program dete
+        startbas  = False  # Start of basic program
         quoted    = False  # Detect if a special character is quoted instead of tokencode for values > 0x80
         while byte1 > 0 or byte2 > 0:
             if byte2 == 0x80 or startbas == True:      #(first value of 0x80 assume as the start of the basic program because programs start at 0x8000 memory location
-                startbas = True
                 # Start of new line
                 
                 #read linenumber
@@ -47,7 +46,7 @@ try:
                 byte2    = int.from_bytes(f.read(1),'big')
                 
                 if byte1 + byte2 > 0:   # The beginning of the program may contain an empty basic line with linenumber 0000, to be ignored
-
+                    startbas = True
                     if byte2 <= 9:
                         basline += '0'
                     basline += str(hex(byte2))[2:]   # remove the 0x
@@ -65,7 +64,9 @@ try:
                         if byte2 > 0x80 and quoted == False:
                             # replace token with command
                             if byte2 > 128 and byte2 < 224:
-                                basline += tokentab[byte2 - 128]+' ' 
+                                basline += tokentab[byte2 - 128]
+                                if byte2 != 0x9D:  # REM command
+                                    basline += ' ' 
                             else:
                                 basline += 'TOKEN['+str(byte2)+'] '
                         elif byte2 >= 32 and byte2 < 127:

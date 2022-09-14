@@ -1,5 +1,5 @@
-# Python 3
-# BIT90 WAV file decoder v1.2
+#!/usr/bin/env python3
+# BIT90 WAV file decoder v1.2.1
 # The input file should be a raw file type PCM 8-bit unsiged 44100Hz mono
 #
 # The BIT90 saves data to tape in blocks of 256 bytes
@@ -9,7 +9,7 @@
 #     0 0 = init tape
 #     1 0 = sync data
 #     1 1 = user data
-# The data is saved with FSK modulation. A 0 bit wave has lower frequency than a 1 bit.
+# The data is saved with FSK modulation. A 0 bit is one wave with a frequency of appr. 2400Hz and a 1 bit is 3675Hz.
 # The difference between 0 and 1 is recognized by counting the number of samples in 1 complete sine-wave.
 
 
