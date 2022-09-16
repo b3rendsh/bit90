@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# BIT90 Basic to Binary encoder v1.0
+# BIT90 Basic to Binary encoder v1.0.1
 # Encoding of BIT90 BASIC Ascii file to a tokenized binary file as stored in BIT90 memory.
 #
 # Limitations:
@@ -60,7 +60,7 @@ try:
             print('Line: ' + linenr)
             
             # parse the contents of the line, assume a space character after the line number
-            basline = basline[5:]
+            basline = basline[n+1:]
             errparse = False
             quoted = False
             rem = False
