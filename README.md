@@ -43,8 +43,7 @@ One limitation of BIT90 BASIC is that numeric variables are single precision flo
 The demo folder contains an example how to use the decoding tools.  
 
 ## Documentation
-The manual you can find here: https://www.retrocomputers.gr/media/kunena/attachments/47/BIT90manual.zip  
-In the docs folder is additional info like hardware/system diagrams, usefull memory addresses and BASIC extension.
+In the docs folder there is the Operation Manual and additional info like hardware/system diagrams, usefull memory addresses and BASIC extension.  
 
 ## Mame emulator
 The developers of Mame created a bit90 machine which is working excellent:  
