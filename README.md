@@ -49,14 +49,11 @@ In the docs folder there is the Operation Manual and additional info like hardwa
 The developers of Mame created a bit90 machine which is working excellent:  
 http://adb.arcadeitalia.net/dettaglio_mame.php?game_name=bit90  
 There's no tape interface yet but you can load a basic program in memory using the debugger.  
-I have created an example in the Mame folder how to do this.
+I have created an example in the Mame folder how to do this.  
 
-## To do
-1. Look into a RC2014 retro hardware solution if it can run the BIT90 roms:  
+## RS232
+Communication program to upload/download files (ie. memory dumps) via the RS232 COM port to/from a PC.  
+
+## Other
+There is a RC2014 retro hardware solution which may run the BIT90 / Colecovision roms:  
 https://hackaday.io/project/159057-game-boards-for-rc2014  
-  
-2. Create RS-232 communication program to upload/download files (ie. memory dumps) to/from pc.
-
-
-
-
