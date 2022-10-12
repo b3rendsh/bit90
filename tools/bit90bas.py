@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# BIT90 Binary to Basic decoder v1.0.3
+# BIT90 Binary to Basic decoder v1.1
 #
 # Each BASIC line consists of:
 # POS VALUE
@@ -26,15 +26,16 @@ try:
         quit()
     filename = sys.argv[1]
     with open(filename + '.bin', 'rb') as f, open(filename + '.bas', 'w') as w:
-        byte1    = int.from_bytes(f.read(1),'big')
-        byte2    = int.from_bytes(f.read(1),'big')
-        basline  = ''
-        tokentab = ['NEW','SAVE','LOAD','EDIT','DELETE','RUN','STOP','CONT','MUSIC','TEMPO','POKE','PEEK(','DEF','OPEN','DIM','RND(','TAB(','AUTO',\
+        byte1     = int.from_bytes(f.read(1),'big')
+        byte2     = int.from_bytes(f.read(1),'big')
+        basline   = ''
+        tokentab  = ['NEW','SAVE','LOAD','EDIT','DELETE','RUN','STOP','CONT','MUSIC','TEMPO','POKE','PEEK(','DEF','OPEN','DIM','RND(','TAB(','AUTO',\
                     'GOSUB','CALL','DATA','ELSE','FOR','GOTO','HOME','INPUT','RANDOMIZE','CLEAR','LIST','REM','NEXT','ON','PRINT','RESTORE','READ',\
                     'STEP','THEN','PLOT','RETURN','TO','UNTRACE','IF','TRACE','COPY','RENUM','PLAY','RESERVED-174','FRE','BYE','END','OPTIONBASE','LET',\
                     'OUT','ONERRGOTO','RESUME','WAIT','REC','>=','<=','<>','AND','OR','NOT','HEX$(','ABS{','ATN{','COS(','EXP(','INT(','LOG(','LN(',\
                     'SGN(','SIN(','SQR(','TAN(','STR$(','CHR$(','IN(','JOYST(','EOF(','SPC(','RIGHT$(','ASC(','VAL(','LEFT$(','MID$(','LEN(','INKEY$',\
                     'POS','BLOAD','FN','BSAVE','RESERVED-220','DEL','RESERVED-222','RESERVED-223']
+        xtokentab = ['TXTMAP','CLS','LINPUT','LOCATE','CLOAD','CBLOAD','CSAVE','CBSAVE','TERMINAL','COLOR']
         startbas  = False  # Start of basic program
         quoted    = False  # Detect if a special character is quoted instead of tokencode for values > 0x80
         while byte1 > 0 or byte2 > 0:
@@ -66,7 +67,9 @@ try:
                             if byte2 > 128 and byte2 < 224:
                                 basline += tokentab[byte2 - 128]
                                 if byte2 != 0x9D:  # REM command
-                                    basline += ' ' 
+                                    basline += ' '
+                            elif byte2 >= 224 and byte2 < 234:
+                                basline += xtokentab[byte2 - 224]+' '	 
                             else:
                                 basline += 'TOKEN['+str(byte2)+'] '
                         elif byte2 >= 32 and byte2 < 127:

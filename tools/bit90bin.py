@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# BIT90 Basic to Binary encoder v1.0.1
+# BIT90 Basic to Binary encoder v1.1
 # Encoding of BIT90 BASIC Ascii file to a tokenized binary file as stored in BIT90 memory.
 #
 # Limitations:
@@ -36,6 +36,7 @@ try:
                      'OUT','ONERRGOTO','RESUME','WAIT','REC','>=','<=','<>','AND','OR','NOT','HEX$(','ABS{','ATN{','COS(','EXP(','INT(','LOG(','LN(',\
                      'SGN(','SIN(','SQR(','TAN(','STR$(','CHR$(','IN(','JOYST(','EOF(','SPC(','RIGHT$(','ASC(','VAL(','LEFT$(','MID$(','LEN(','INKEY$',\
                      'POS','BLOAD','FN','BSAVE','RESERVED-220','DEL','RESERVED-222','RESERVED-223']
+        xtokentab = ['TXTMAP','CLS','LINPUT','LOCATE','CLOAD','CBLOAD','CSAVE','CBSAVE','TERMINAL','COLOR']
         count    = 0
         basline  = f.readline().strip() # remove leading and trailing spaces and cr/lf
         binline  = [0,0]
@@ -81,8 +82,20 @@ try:
                             else:
                                 basline = basline.lstrip()
                             break
-                        tokencode += 1    
-                if (tokencode == 224) or quoted or rem:
+                        tokencode += 1
+                    # check for command in xtokentab
+                    if  (tokencode == 224):
+                        for command in xtokentab:
+                            if basline.lstrip().startswith(command):
+                                # print(command)
+                                binline.append(tokencode)
+                                basline = basline.lstrip()
+                                basline = basline[len(command):]
+                                # print(basline)
+                                basline = basline.lstrip()
+                                break
+                            tokencode += 1
+                if (tokencode == 234) or quoted or rem:
                     if basline.startswith('";CHR$(') and len(basline) > 13:   # Special character > 128 is written as ";CHR$(nnn);"
                         binline.append(int(basline[7:10]))
                         basline = basline[13:]
