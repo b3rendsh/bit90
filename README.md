@@ -21,7 +21,9 @@ Due to some errors in the PAL RF TV module, the far left side of the screen is n
 
 ## BASIC
 The BIT90 BASIC is similar to MSX and TI-99/4A. You can extend it with your own commands.  
-Some examples uploaded include: 
+In the xbas folder there is an extended basic library. The documentation for that is in the xbas.asm source file.  
+  
+Some examples uploaded include:  
 - The demo from Bit Corporation.  
 - Games Breakout, Othello, Memory.    
 - Conway's game of LIFE (UI in BASIC / engine in Assembler).    
