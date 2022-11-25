@@ -2,7 +2,7 @@
 BIT90 home computer
 
 ## General Information
-The BIT90 is an 8-bit home computer from 1983. It can play Colecovision games from cartridge or tape, or it can be used as a BASIC computer. The BIT90 is a rare computer. Although this is speculative, it looks like a missing link between Colecovision and Spectravideo (SV-328), and from there to MSX. I have used it for many years in the eighties as my first home computer. Now it's a fun project to rediscover, reverse engineer and meanwhile learn modern day tools like Ghidra, Audacity, SDR, Python, etc. 
+The BIT90 is an 8-bit home computer from 1983. It can play Colecovision games from cartridge or tape, or it can be used as a BASIC computer. The BIT90 is a rare computer, the hardware is similar to the Colecovision,SV-328,SC-3000 and MSX1 family. The manufacturer Bit Corporation worked with Colecovision on some games and parts of it's popular console. I have used the BIT90 for many years in the eighties as my first home computer. Now it's a fun project to rediscover, reverse engineer and meanwhile learn modern day tools like Ghidra, Audacity, SDR, Python, etc. 
   
 In this repository you find technical documentation, tools and BASIC programs I collected and wrote over time.
 
@@ -17,7 +17,7 @@ The code shared in this repository is tested and works on the following hardware
 - 11.6" TFT Display with composite video + audio
 
 Note: in the (PAL) version 3.1 of the BIT90 rom 30x24 characters are available in textmode instead of the 32x24 in the (NTSC) 3.0 version.
-Due to some errors in the PAL RF TV module, the far left side of the screen is not visible.
+Due to some errors in the PAL RF TV module, the far left side of the screen is not visible. The composite out works just fine.  
 
 ## BASIC
 The BIT90 BASIC is similar to MSX and TI-99/4A. You can extend it with your own commands.  
@@ -31,12 +31,12 @@ Some examples uploaded include:
   
 Quickstart guide for use in mame:  
 start mame in debug-mode: mame bit90 -debug  
-in the debug window load a binary M7800-\*.bin file at address 7800 and start the machine with F5.  
-or start the machine first and load any other binary \*.bin file at address 8004 and then run BIT90 command: CALL 12491.  
+start the machine with F5  
+load a BASIC binary \*.bin file at address 8004   
+run BIT90 command: CALL 12491  
   
 Conversion from other BASIC systems:  
-Converting TI-BASIC or any Microsoft BASIC version prior to 1983 (eg. BASIC-80) is relatively easy.   
-One limitation of BIT90 BASIC is that numeric variables are single precision floating point (4 bytes), no integers or double precision. The graphics commands are almost identical to TI and there are music notes to PLAY music like in MSX. The "BIOS" is different than MSX and certainly the TI-99/4A. Programs that PEEK and POKE around in memory are more challenging to convert.
+Converting TI-BASIC or any Microsoft BASIC version prior to 1983 (eg. BASIC-80 or Applesoft) is relatively easy. One limitation of BIT90 BASIC is that numeric variables are single precision floating point (4 bytes), no integers or double precision. Although the syntax is much the same as Microsoft BASIC versions, the internal structure and subroutines are unique and tailered for the BIT90. 
 
 ## Decoding tools
 -The bit90decode.py program decodes tape data to a binary file.  
