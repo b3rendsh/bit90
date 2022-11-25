@@ -1,0 +1,11 @@
+Changelog XBAS.ASM
+------------------
+
+Version 0.4:
+1. Implemented new commands: EXIT,VPOKE,VPEEK,CIRCLE,PAINT,BEEP,INVERSE,NORMAL
+2. LOCATE command: add 2 positions to X in 30x24 screen only in BASIC V3.1
+3. Moved the EXTOKEN table up 128 bytes in memory
+
+
+Version 0.3:
+Initial release
