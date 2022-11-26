@@ -1,5 +1,5 @@
 ; ------------------------------------------------------------------------------
-; BIT90 RS232 LOAD/SAVE v0.1
+; BIT90 RS232 LOAD/SAVE v0.1.1
 ; Copyright (C) 2022 H.J. Berends
 ;
 ; You can freely use, distribute or modify this program.
@@ -72,7 +72,7 @@ CBLOAD:
 	LD	BC,DE
 	LD	A,(HL)
 	CP	$2C
-	JP	NZ,$02FC
+	JP	NZ,$02F3
 	INC	HL
 	CALL	$06B9
 	CALL	$22D6
@@ -150,7 +150,7 @@ CBSAVE:
 	LD	BC,DE
 	LD	A,(HL)
 	CP	$2C
-	JP	NZ,$02FC
+	JP	NZ,$02F3
 	INC	HL
 	CALL	$06B9
 	CALL	$22D6

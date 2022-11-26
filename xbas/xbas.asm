@@ -1,5 +1,5 @@
 ; ------------------------------------------------------------------------------
-; BIT90 eXtended BASIC v0.4
+; BIT90 eXtended BASIC v0.4.1
 ; Copyright (C) 2022 H.J. Berends
 ; 
 ; You can freely use, distribute or modify this program.
@@ -59,7 +59,7 @@
 
 ; BIT90 V3.1 CONSTANTS
 
-REGEXERR	=  $02FC	; BASIC expression validator / error routine
+REGEXERR	=  $02F3	; BASIC expression validator / error routine
 PRMVAL		=  $06B9	; BASIC routine to validate a parameter expression
 GETPWORD	=  $22D6	; BASIC routine to get a parameter word value into register DE
 GETPBYTE	=  $2540	; BASIC routine to get a parameter byte value into register A
@@ -265,14 +265,14 @@ LOCATE:		LD	A,(TXTMODE)
 		LD	A,(HL)
 		CALL 	GETPBYTE		; Get cursor X position
 		CP	$32			; X position < 50 ?
-		JP	NC,$02F3		; No then syntax error
+		JP	NC,REGEXERR		; No then syntax error
 		LD	(CURPOSX),A
 		CALL	parseComma
 		LD	A,(MAXLIN)
 		LD	B,A
 		CALL	GETPBYTE		; Get cursor Y position
 		CP	B			; Y position < maxlin ?
-		JP	NC,$02F3		; No then syntax error
+		JP	NC,REGEXERR		; No then syntax error
 		LD	(CURPOSY),A
 		RET
 
@@ -1706,7 +1706,7 @@ ntOffset:	LD	A,D
 ; --------------------------------------------------------
 parseComma:	LD	A,(HL)
 		CP	$2C
-		JP	NZ,$02F3
+		JP	NZ,REGEXERR
 		INC	HL
 		RET
 
