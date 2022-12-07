@@ -1,5 +1,5 @@
 ; ------------------------------------------------------------------------------
-; BIT90 eXtended BASIC v0.4.1
+; BIT90 eXtended BASIC v0.4.2
 ; Copyright (C) 2022 H.J. Berends
 ; 
 ; You can freely use, distribute or modify this program.
@@ -83,17 +83,17 @@ TXTBUF		=  $7500	; Text mode IO buffer (256 bytes), low byte must start at 00 (!
 CURPOS		=  $7600	; 30208 Cursor X,Y  (don't swap these 2 positions!)
 CURPOSX		=  $7600	; 30208 Cursor X
 CURPOSY		=  $7601	; 30209 Cursor Y
-MINPOS		=  $7602	; 30210 Minimum curpos Y,X
-MINPOSX		=  $7602	; 30210 Minimum curpos Y
-MINPOSY		=  $7603	; 30211 Minimum curpos X
+MINPOS		=  $7602	; 30210 Minimum curpos X,Y
+MINPOSX		=  $7602	; 30210 Minimum curpos X
+MINPOSY		=  $7603	; 30211 Minimum curpos Y
 BUFLEN		=  $7604	; 30212 Length of input buffer
 MAXLIN		=  $7605	; 30213 Maximum linenumber + 1
 TXTMODE		=  $7606	; 30214 0=Standard 1=Bitmap/text 2=Monochrome
 TXTCOLOR	=  $7607	; 30215 Text color
 INVCHAR		=  $7608	; 30216 Inverse character (inverse color)
-CURSAV		=  $7609	; 30217 Saved curpos Y,X
-CURSAVX		=  $7609	; 30217 Saved curpos Y
-CURSAVY		=  $760A	; 30218 Saved curpos X
+CURSAV		=  $7609	; 30217 Saved curpos X,Y
+CURSAVX		=  $7609	; 30217 Saved curpos X
+CURSAVY		=  $760A	; 30218 Saved curpos Y
 COLORSAV	=  $760B	; 30219 Saved color (reserved)
 COMSPEED	=  $760C	; 30220	Baudrate selection
 COMMODE		=  $760D	; 30221	Baudrate divder / bits / parity / stopbits
@@ -967,9 +967,9 @@ _enterPressed:	POP	HL
 		RES	6,(HL)
 		CALL	cursor
 		LD	BC,$00FF		; Counter
-		LD	DE,IOBUF		; Source buffer
+		LD	DE,IOBUF		; Destination buffer
 		PUSH	DE
-		LD	HL,TXTBUF		; Destination buffer
+		LD	HL,TXTBUF		; Source buffer
 		LDIR
 		POP	DE
 		LD	HL,(BUFLEN)
@@ -2096,32 +2096,32 @@ SECTION	CHARACTERSET
 		DB	$00,$69,$00,$00	; 94 ^
 		DB	$00,$00,$00,$0F	; 95 _
 		DB	$06,$42,$00,$00	; 96 `
-		DB	$00,$69,$9F,$90	; 97 a
+		DB	$00,$06,$9F,$90	; 97 a
 		DB	$08,$8E,$99,$E0	; 98 b
-		DB	$00,$68,$88,$60	; 99 c
+		DB	$00,$06,$88,$60	; 99 c
 		DB	$01,$17,$99,$70	; 100 d
-		DB	$00,$69,$E8,$70	; 101 e
-		DB	$02,$44,$E4,$48	; 102 f
-		DB	$00,$79,$97,$16	; 103 g
+		DB	$00,$06,$9E,$70	; 101 e
+		DB	$06,$4E,$44,$40	; 102 f
+		DB	$00,$07,$97,$16	; 103 g
 		DB	$08,$8E,$99,$90	; 104 h
 		DB	$02,$02,$22,$20	; 105 i
 		DB	$02,$02,$22,$24	; 106 j
-		DB	$08,$9A,$CA,$90	; 107 k
+		DB	$08,$8A,$CC,$A0	; 107 k
 		DB	$04,$44,$44,$60	; 108 l
-		DB	$00,$9F,$99,$90	; 109 m
-		DB	$00,$E9,$99,$90	; 110 n
-		DB	$00,$69,$99,$60	; 111 o
-		DB	$00,$E9,$9E,$88	; 112 p
-		DB	$00,$79,$97,$11	; 113 q
-		DB	$00,$68,$88,$80	; 114 r
-		DB	$00,$68,$42,$C0	; 115 s
-		DB	$08,$8C,$88,$60	; 116 t
-		DB	$00,$99,$99,$60	; 117 u
-		DB	$00,$99,$9A,$C0	; 118 v
-		DB	$00,$99,$9F,$90	; 119 w
+		DB	$00,$09,$F9,$90	; 109 m
+		DB	$00,$0E,$99,$90	; 110 n
+		DB	$00,$06,$99,$60	; 111 o
+		DB	$00,$0E,$9E,$88	; 112 p
+		DB	$00,$07,$97,$11	; 113 q
+		DB	$00,$06,$88,$80	; 114 r
+		DB	$00,$07,$C3,$E0	; 115 s
+		DB	$04,$4E,$44,$20	; 116 t
+		DB	$00,$09,$99,$60	; 117 u
+		DB	$00,$09,$9A,$C0	; 118 v
+		DB	$00,$09,$9F,$90	; 119 w
 		DB	$00,$09,$66,$90	; 120 x
-		DB	$00,$99,$71,$16	; 121 y
-		DB	$00,$F1,$68,$F0	; 122 z
+		DB	$00,$09,$97,$16	; 121 y
+		DB	$00,$0F,$3C,$F0	; 122 z
 		DB	$00,$64,$84,$60	; 123 {
 		DB	$04,$40,$44,$40	; 124 |
 		DB	$00,$C4,$24,$C0	; 125 }
