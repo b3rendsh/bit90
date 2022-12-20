@@ -59,4 +59,4 @@ Communication program to upload/download files (ie. memory dumps) via the RS232 
 ## Other
 There is a RC2014 retro hardware solution which may run the BIT90 / Colecovision roms:  
 https://hackaday.io/project/159057-game-boards-for-rc2014  
-The main issue here is that you have to rewrite the console routines for keyboard input and text output, which is possible because there are hooks for it in the BIT90 RAM. Instead I decided to port BBC BASIC Z80 for CP/M to the BIT90, while preserving BIT90 specifics like tape load/save and plot graphics, and use my own xbas library for the console. I will publish this "BBX80" BASIC OS in a separate repository soon, if there's no copyright limitation. There's a few snapshots of it already in the images folder. 
+The main issue here is that you have to rewrite the console routines for keyboard input and text output, which is possible because there are hooks for it in the BIT90 RAM. Instead I decided to port BBC BASIC Z80 for CP/M to the BIT90, while preserving BIT90 specifics like tape load/save and plot graphics, and use my own xbas library for the console. I have published this "BBX80" BASIC OS in a separate repository.
