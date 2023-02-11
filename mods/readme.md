@@ -16,9 +16,9 @@ Disclaimer/warning: use this information at your own risk, these changes can cau
 1. Cursor starts at position 0 when in 32x24 text mode (like in BASIC 3.0).
 2. Minimize vertical spacing for the prompt. Don't display "READY" before ">".
 3. Opening message "BIT90 VERSION 3.2". Can also be used for BIOS version check in programs: V=PEEK(12894)-48.
-4. Changes to LIST command: 
-   a. Pressing the space-bar pauses listing instead of the ?-key.
-   b. Insert a space after line number instead of a tab.
+4. Changes to LIST command:  
+   a. Pressing the space-bar pauses listing instead of the ?-key.  
+   b. Insert a space after line number instead of a tab.  
 5. Moved up the orange cursor sprite one line to align with the redefined font.
 
 ### IPS PATCHES
@@ -27,8 +27,7 @@ The changes are published here as IPS patches for the original ROM files. They o
 ### ROM CHIP 2364 TO 2764
 The BIT90 may have either 24-pin 2364 Mask ROM's or 28-pin 2764 Eprom or a mix of both. There are pin adapters available from 2364 to 2764 but on the system board there are also 3 jumper locations where you can make the necessary changes if needed. For convenience I soldered jumper pins and removed the horizontal lanes between the pins on the PCB.
 
-I also replaced the 8KB Roms with 27C256 Eproms and wired A13+A14 with a 4K7 pull-up resistor to 5V and via a 3-way switch to ground so I can choose between 3 
-different ROM versions. This solution can be undone without leaving traces:
+I also replaced the 8KB Roms with 27C256 Eproms and wired A13+A14 with a 4K7 pull-up resistor to 5V and via a 3-way switch to ground so I can choose between 3 different ROM versions. I used an extra IC socket so pins 26 and 27 are not connected to the system board but to a separate small breadboard. This solution can be undone without leaving traces:
 [BIT90 Eprom mod](BIT90%20Eprom%20mod.png)
 
 ## HARDWARE
