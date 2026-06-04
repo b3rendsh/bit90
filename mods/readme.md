@@ -4,11 +4,11 @@ Disclaimer/warning: use this information at your own risk, these changes can cau
 
 ## ROM 
 ### COLECO ROM 
-1. Improve Colecovision BIOS compatibility:
-   a. Boot sequence: check for cartridge code "55 AA" at address 0x8000 to directly start the cartridge.
-   b. InitFont (0x1927), InitRAMSprt (0x1C66) and WrtVRAM (0x1D01): fixed the differences with the Colecovision code.
-   c. Init SP to 0x73B9 to prevent boot loop error (e.g. in Carnival game).
-   d. Fixed bug where keyboard key 6 was mapped to keypad key 7 instead of 6.
+1. Improve Colecovision BIOS compatibility:  
+   a. Boot sequence: check for cartridge code "55 AA" at address 0x8000 to directly start the cartridge.  
+   b. InitFont (0x1927), InitRAMSprt (0x1C66) and WrtVRAM (0x1D01): fixed the differences with the Colecovision code.  
+   c. Init SP to 0x73B9 to prevent boot loop error (e.g. in Carnival game).  
+   d. Fixed bug where keyboard key 6 was mapped to keypad key 7 instead of 6.  
 2. Reduce opening credits screen wait time from appr. 12 to 6 seconds (also when starting the machine in BASIC mode).
 3. The font character definitions are aligned to the top like the Coleco font and many lower case characters are redefined to improve readability. Note that this same font definition is also used in BASIC mode.
 
