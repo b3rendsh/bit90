@@ -14,7 +14,7 @@ The code shared in this repository is tested and works on the following hardware
 - RS232 serial interface expansion card
 - Parallel expansion card for BIT90 printer (not Centronics)
 - Sanyo DR101 taperecorder
-- 11.6" TFT Display with composite video + audio
+- Monitor with composite video + audio
 
 Note: in the (PAL) version 3.1 of the BIT90 rom 30x24 characters are available in textmode instead of the 32x24 in the (NTSC) 3.0 version.
 Due to some errors in the PAL RF TV module, the far left side of the screen is not visible. The composite out works just fine.  
@@ -52,6 +52,7 @@ The developers of Mame created a bit90 machine which is working excellent:
 http://adb.arcadeitalia.net/dettaglio_mame.php?game_name=bit90  
 There's no tape interface yet but you can load a basic program in memory using the debugger.  
 I have created an example in the Mame folder how to do this.  
+Update: see issue b3rendsh/bit90#1
 
 ## RS232
 Communication program to upload/download files (ie. memory dumps) via the RS232 COM port to/from a PC.  
