@@ -1,5 +1,5 @@
 ; ------------------------------------------------------------------------------
-; BIT90 eXtended BASIC v0.4.2
+; BIT90 eXtended BASIC v0.4.3
 ; Copyright (C) 2022 H.J. Berends
 ; 
 ; You can freely use, distribute or modify this program.
@@ -1068,111 +1068,114 @@ endChar:	POP	AF
 		POP	BC
 		RET
 
-charBell:	LD   B,$10
-_repeat1Bell:	LD   A,$80
-		OUT  ($FF),A
-		LD   A,$03
-		OUT  ($FF),A
-		LD   A,$A0
-		SUB  B
-		OUT  ($FF),A
-		LD   HL,$0A00
-_repeat2Bell:	DEC  HL
-		LD   A,H
-		OR   L
-		JR   NZ,_repeat2Bell
-		DJNZ _repeat1Bell
-		JP   endChar
+charBell:	LD	B,$10
+_repeat1Bell:	LD	A,$80
+		OUT	($FF),A
+		LD	A,$03
+		OUT	($FF),A
+		LD	A,$A0
+		SUB	B
+		OUT	($FF),A
+		LD	HL,$0A00
+_repeat2Bell:	DEC	HL
+		LD	A,H
+		OR	L
+		JR	NZ,_repeat2Bell
+		DJNZ	_repeat1Bell
+		JP	endChar
 
-charBS:		LD   A,D
-		OR   E
-		JP   Z,charBell
-		CALL curMin
-		LD   A,$20
-		CALL screenWrite
-		CALL bufCount
-		LD   (HL),A
-		JP   endCharPos
+charBS:		LD	A,D
+		OR	E
+		JP	Z,charBell
+		CALL	curMin
+		CALL	bufCount
+		LD	A,L
+		CP	$FF			; BS before 1st char in buffer?
+		JP	Z,endCharPos	
+		LD	A,$20
+		CALL	screenWrite
+		LD	(HL),A
+		JP	endCharPos
 
-charTab:	LD   A,$09
-_repeatTab:	CP   E
-		JR   NC,_endTab
-		ADD  A,$0A
-		CP   $31
-		JR   NZ,_repeatTab
-		INC  D
-		LD   E,$00
-		JP   endCharScroll
-_endTab:	INC  A
-		LD   E,A
-		JP   endCharPos
+charTab:	LD	A,$09
+_repeatTab:	CP	E
+		JR	NC,_endTab
+		ADD	A,$0A
+		CP	$31
+		JR	NZ,_repeatTab
+		INC	D
+		LD	E,$00
+		JP	endCharScroll
+_endTab:	INC	A
+		LD	E,A
+		JP	endCharPos
 
-charEnter:	LD   E,$00
-		JP   endCharPos
+charEnter:	LD	E,$00
+		JP	endCharPos
 
-charAscii:	CALL screenWrite
-		CALL bufCount
-		LD   (HL),A
-		CALL curPlus
-		JP   endCharScroll
+charAscii:	CALL	screenWrite
+		CALL	bufCount
+		LD	(HL),A
+		CALL	curPlus
+		JP	endCharScroll
 
-charUp:		XOR  A
-		OR   D
-		JP   Z,charBell
-		DEC  D
-		JP   endCharPos
+charUp:		XOR	A
+		OR	D
+		JP	Z,charBell
+		DEC	D
+		JP	endCharPos
 
-charDown:	INC  D
-		JP   endCharScroll
+charDown:	INC	D
+		JP	endCharScroll
 
-charLeft:	LD   A,E
-		OR   D
-		JP   Z,charBell
-		CALL curMin
-		JP   endCharPos
+charLeft:	LD	A,E
+		OR	D
+		JP	Z,charBell
+		CALL	curMin
+		JP	endCharPos
 
-charRight:	CALL curPlus
-		JP   endCharScroll
+charRight:	CALL	curPlus
+		JP	endCharScroll
 
-charDelete:	CALL bufCount
-_repeatDelete:	INC  HL
-		LD   A,(HL)
-		DEC  HL
-		LD   (HL),A
-		CALL screenWrite
-		CALL curPlus
-		INC  HL
-		LD   A,(BUFLEN)
-		CP   L
-		JR   NZ,_repeatDelete
-		JP   endChar
+charDelete:	CALL	bufCount
+_repeatDelete:	INC	HL
+		LD	A,(HL)
+		DEC	HL
+		LD	(HL),A
+		CALL	screenWrite
+		CALL	curPlus
+		INC	HL
+		LD	A,(BUFLEN)
+		CP	L
+		JR	NZ,_repeatDelete
+		JP	endChar
 
-charInsert:	CALL bufCount
-		LD   A,(BUFLEN)
-		DEC  A
-		LD   C,A
-		LD   B,H
-		LD   A,(BC)
-		CP   $20
-		JP   NZ,charBell
-_repeat1Insert:	DEC  BC
-		LD   A,(BC)
-		INC  BC
-		LD   (BC),A
-		DEC  BC
-		LD   A,L
-		CP   C
-		JR   NZ,_repeat1Insert
-		LD   A,$20
-		LD   (BC),A
-_repeat2Insert:	CALL screenWrite
-		CALL curPlus
-		INC  BC
-		LD   A,(BUFLEN)
-		CP   C
-		JP   Z,endChar
-		LD   A,(BC)
-		JR   _repeat2Insert
+charInsert:	CALL	bufCount
+		LD	A,(BUFLEN)
+		DEC	A
+		LD	C,A
+		LD	B,H
+		LD	A,(BC)
+		CP	$20
+		JP	NZ,charBell
+_repeat1Insert:	DEC	BC
+		LD	A,(BC)
+		INC	BC
+		LD	(BC),A
+		DEC	BC
+		LD	A,L
+		CP	C
+		JR	NZ,_repeat1Insert
+		LD	A,$20
+		LD	(BC),A
+_repeat2Insert:	CALL	screenWrite
+		CALL	curPlus
+		INC	BC
+		LD	A,(BUFLEN)
+		CP	C
+		JP	Z,endChar
+		LD	A,(BC)
+		JR	_repeat2Insert
 
 ; ------------------------------------------------------------------------------
 ; Command: COLOR FG,BG
@@ -1385,7 +1388,7 @@ _seekLeft:	LD	A,E
 		DEC	E
 		CALL	getPixel		; get pixel pattern at Y,X in DE
 		JR	Z,_seekLeft
-_seekRight:    	INC	E
+_seekRight:	INC	E
 		JR	Z,_rightEdge		; Right border reached
 _goRight:	CALL	getSetPixel
 		JR	NZ,_rightEdge
@@ -1637,6 +1640,7 @@ _repeatPatDest:	OUTI
 		JR	Z,_endCopyLine
 		SET	5,D			; Offset Color table
 		LD	C,$BF
+		XOR	A
 		OUT	(C),A
 		OUT	(C),D
 		LD	C,$BE
@@ -1674,6 +1678,7 @@ _repeatClrPat:	OUT	($BE),A			; Clear Pattern
 		LD	A,(TXTMODE)
 		CP	$02	
 		RET	Z			; no color clear necessary in monochrome mode
+		XOR	A
 		OUT	($BF),A
 		SET	5,C			; Offset Color table
 		LD	A,C

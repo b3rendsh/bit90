@@ -1,6 +1,10 @@
 Changelog XBAS.ASM
 ------------------
 
+Version 0.4.3:
+1. Fixed artifacts when scrolling lines
+2. Fixed Backspace from 1st character would erase prompt
+
 Version 0.4.2:
 1. FONT changes: redefined lower case characters
 2. Corrected a few errors in the comments
