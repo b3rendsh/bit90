@@ -1,0 +1,12 @@
+Source:
+https://github.com/b3rendsh/bit90
+
+Files:
+bit90_basic_v31.bin	16KB BASIC 3.1 original (2x8KB ROM)
+bit90_basic_v32.bin	16KB BASIC 3.2 modified
+bit90_basic_r26.bin	16KB BASIC 3.2 modified for BIT90/R26
+bit90_game_v31.bin	8KB GAME 3.1 original
+bit90_game_v32.bin	8KB GAME 3.2 modified
+bit90_game_r26.bin	8KB GAME 3.2 modified for BIT90/R26
+coleco_test.bin		8KB Coleco ROM compatibility test (don't use)
+
