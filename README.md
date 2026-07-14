@@ -19,9 +19,12 @@ The code shared in this repository is tested and works on the following hardware
 Note: in the (PAL) version 3.1 of the BIT90 rom 30x24 characters are available in textmode instead of the 32x24 in the (NTSC) 3.0 version.
 Due to some errors in the PAL RF TV module, the far left side of the screen is not visible. The composite out works just fine.  
 
+## System software
+The [src](src/) folder contains recreated system source code for the BASIC and GAME system ROM.
+
 ## BASIC
 The BIT90 BASIC is similar to MSX and TI-99/4A. You can extend it with your own commands.  
-In the xbas folder there is an extended basic library. The documentation for that is in the xbas.asm source file.  
+In the [xbas](xbas/) folder there is an extended basic library. The documentation for that is in the xbas.asm source file.  
   
 Some examples uploaded include:  
 - The demo from Bit Corporation.  
@@ -42,10 +45,10 @@ Converting TI-BASIC or any Microsoft BASIC version prior to 1983 (eg. BASIC-80 o
 -The bit90decode.py program decodes tape data to a binary file.  
 -The bit90bas.py program decodes a binary coded file to a basic text file.  
 -The bit90bin.py program encodes a basic text file to a binary coded file.  
-The demo folder contains an example how to use the decoding tools.  
+The [demo](demo/) folder contains an example how to use the decoding tools.  
 
 ## Documentation
-In the docs folder there is the Operation Manual and additional info like hardware/system diagrams, usefull memory addresses and BASIC extension.  
+In the [docs](docs/) folder there is the Operation Manual and additional info like hardware/system diagrams, usefull memory addresses and BASIC extension.  
 
 ## Mame emulator
 The developers of Mame created a bit90 machine which is working excellent:  
@@ -58,6 +61,10 @@ Update: see issue b3rendsh/bit90#1
 Communication program to upload/download files (ie. memory dumps) via the RS232 COM port to/from a PC.  
 
 ## Other
-There is a RC2014 retro hardware solution which may run the BIT90 / Colecovision roms:  
+There is a retro z80/z180 hardware solution to run the BIT90/Colecovision ROMs:  
 https://hackaday.io/project/159057-game-boards-for-rc2014  
-The main issue here is that you have to rewrite the console routines for keyboard input and text output, which is possible because there are hooks for it in the BIT90 RAM. Instead I decided to port BBC BASIC Z80 for CP/M to the BIT90, while preserving BIT90 specifics like tape load/save and plot graphics, and use my own xbas library for the console. I have published this "BBX80" BASIC OS in a separate repository.
+I patched the BIT90/Coleco system sources to bridge the hardware gap.  
+See also: [cvload repository](https://github.com/b3rendsh/cvload)
+
+BBC BASIC Z80 for CP/M is ported to the BIT90, with BIT90 specific hardware support like tape load/save and plot graphics.  
+See also: [bbx80 repository](https://github.com/b3rendsh/bbx80)
