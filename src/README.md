@@ -22,7 +22,7 @@ V3.2 includes game rom modifications to improve Coleco compatibility.
 Under construction!  
 V3.2 with additional changes to support non mirrored 8KB internal RAM.  
 
-**test**
+**test**  
 Used for checking Coleco OS7 differences. This build is intentionally incomplete.
 
 ## Sources
